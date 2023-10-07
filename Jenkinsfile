@@ -33,6 +33,7 @@ pipeline {
 stage('Build and Push Docker Image') {
             steps {
                 script {
+                    sh "pwd"
                     dir('/var/lib/jenkins/workspace/paymentservice') {
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
