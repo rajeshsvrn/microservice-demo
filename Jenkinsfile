@@ -22,7 +22,7 @@ pipeline {
     stage('Authenticate with Azure') {
             steps {
                 script {
-                     withCredentials([azureServicePrincipal(credentialsId: 'azure-cred')]){
+                     withCredentials([azureServicePrincipal('azure-cred')]){
                         // Use the Azure service principal credentials
                         sh """
                         az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET --tenant \$AZURE_TENANT_ID --allow-no-subscriptions
