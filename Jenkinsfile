@@ -8,6 +8,7 @@ pipeline {
         RESOURCE_GROUP = 'Online-Boutique'
         IMAGE_NAME = 'paymentservice'
         DOCKERFILE_PATH = './paymentservice/Dockerfile'
+        AZURE-CRED = credentials('azure-cred')
     }
 
     stages {
@@ -21,11 +22,7 @@ pipeline {
     stage('Authenticate with Azure') {
             steps {
                 script {
-                     withCredentials([azureServicePrincipal(credentialsId: 'azure-cred', 
-                                                      subscriptionId: '$AZURE_SUBSCRIPTION_ID',
-                                                      tenantId: '$AZURE_TENANT_ID',
-                                                      clientId: '$AZURE_CLIENT_ID',
-                                                      clientSecret: '$AZURE_CLIENT_SECRET')]) {
+                     withCredentials([azureServicePrincipal(credentialsId: 'azure-cred']){
                         // Use the Azure service principal credentials
                         sh """
                         az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET --tenant \$AZURE_TENANT_ID --allow-no-subscriptions
