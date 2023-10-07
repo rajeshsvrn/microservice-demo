@@ -38,7 +38,7 @@ stage('Build and Push Docker Image') {
                     withCredentials([azureServicePrincipal(credentialsId: 'azure-cred')]){
                     //Docker login
 
-                    sh "docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${AZURE_CRED}
+                    sh "docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p ${AZURE_CRED}
                         
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
