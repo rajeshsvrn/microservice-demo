@@ -33,6 +33,7 @@ pipeline {
                         // Push the Docker image to ACR
                         sh "docker push ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
                     }
+                }       
             }
         }  
         
