@@ -36,6 +36,8 @@ stage('Build and Push Docker Image') {
                 script {
                     sh "pwd"
                     dir('/var/lib/jenkins/workspace/paymentservice') {
+
+                    sh 'cd /var/lib/jenkins/workspace/paymentservice/paymentservice'    
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
 
