@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = '15'
         RESOURCE_GROUP = 'Online-Boutique'
         IMAGE_NAME = 'paymentservice'
-        DOCKERFILE_PATH = '/var/lib/jenkins/workspace/paymentservice/paymentservice'
+        DOCKERFILE_PATH = '/var/lib/jenkins/workspace/paymentservice/paymentservice/Dockerfile'
     }
 
     stages {
