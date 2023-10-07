@@ -8,7 +8,7 @@ pipeline {
         RESOURCE_GROUP = 'Online-Boutique'
         IMAGE_NAME = 'paymentservice'
         DOCKERFILE_PATH = './paymentservice/Dockerfile'
-        AZURE_CRED = credentials('azure-cred')
+        //AZURE_CRED = credentials('azure-cred')
     }
 
     stages {
