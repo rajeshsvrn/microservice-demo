@@ -17,25 +17,36 @@ pipeline {
             }
         }
 
-        stage('build image and publish'){
-            steps{
-                    script {
-                    // Login to Azure using service principal credentials
-                    withCredentials([azureServicePrincipal('azure-cred')]) {
-                        sh "az acr login --name ${ACR_NAME}"
-                        
-                        // Build the Docker image
-                        sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
-                        
-                        // Tag the Docker image for ACR
-                        sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
-                        
-                        // Push the Docker image to ACR
-                        sh "docker push ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
+        stages {
+        stage('Authenticate with Azure') {
+            steps {
+                script {
+                    withCredentials([azureServicePrincipal('your-azure-credentials-id')]) {
+                        // Use the Azure service principal credentials
+                        sh """
+                        az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET --tenant \$AZURE_TENANT_ID
+                        """
                     }
-                }       
+                }
             }
-        }  
+        }
+
+
+stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    // Build the Docker image
+                    sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
+
+                    // Tag the Docker image for ACR
+                    sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
+
+                    // Push the Docker image to ACR
+                    sh "docker push ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
+                }
+            }
+        }
+    }
         
         
     }  //Stages
