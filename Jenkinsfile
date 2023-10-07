@@ -39,7 +39,7 @@ stage('Build and Push Docker Image') {
                     //Docker login
 
                     sh """
-                    docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${AZURE_CRED}
+                    docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${AZURE_CRED} ${ACR_NAME}.azurecr.io
                     """    
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
