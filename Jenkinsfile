@@ -9,7 +9,7 @@ pipeline {
         IMAGE_NAME = 'paymentservice'
         DOCKERFILE_PATH = './paymentservice/Dockerfile'
         AZURE_CRED = 'azure-cred'
-        ACR_ACCESS_KEY  = 'gf7ZAsys/bHm+1LEjg9ZHXHyTxyWztH5BinGq6ctI3+ACRAA9UXN'
+        //ACR_ACCESS_KEY  = 'gf7ZAsys/bHm+1LEjg9ZHXHyTxyWztH5BinGq6ctI3+ACRAA9UXN'
     }
 
     stages {
