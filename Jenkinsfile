@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = '15'
         RESOURCE_GROUP = 'Online-Boutique'
         IMAGE_NAME = 'paymentservice'
-        DOCKERFILE_PATH = './paymentservice'
+        DOCKERFILE_PATH = '/var/lib/jenkins/workspace/paymentservice/paymentservice'
     }
 
     stages {
@@ -35,9 +35,7 @@ stage('Build and Push Docker Image') {
             steps {
                 script {
                     sh "pwd"
-                    dir('/var/lib/jenkins/workspace/paymentservice') {
-
-                    sh 'cd /var/lib/jenkins/workspace/paymentservice/paymentservice'    
+                    dir('/var/lib/jenkins/workspace/paymentservice') {   
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
 
