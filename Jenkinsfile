@@ -33,12 +33,35 @@ pipeline {
     //         }
     //     }
 
-stage('Build and Push Docker Image') {
+// stage('Build and Push Docker Image') {
+//             steps {
+//                 script {
+//                     withCredentials([string(credentialsId: 'ACR_ACCESS_KEY', variable: 'ACR_ACCESS_KEY')]) {
+//                 sh """
+//                     docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${ACR_ACCESS_KEY}
+//                 """
+//             }
+
+//                 // Build the Docker image
+//                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
+
+//                     // Tag the Docker image for ACR
+//                     sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
+
+//                     // Push the Docker image to ACR
+//                     sh "docker push ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
+                        
+//                     }   
+//               }
+//             }     
+
+
+   stage('Build and Push Docker Image') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'ACR_ACCESS_KEY', variable: 'ACR_ACCESS_KEY')]) {
+                    withCredentials([azureServicePrincipal(credentialsId: 'azure-cred')]){
                 sh """
-                    docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${ACR_ACCESS_KEY}
+                   az acr login ${ACR_NAME}.azurecr.io 
                 """
             }
 
@@ -53,7 +76,7 @@ stage('Build and Push Docker Image') {
                         
                     }   
               }
-            }     
+            }          
         
         
     }  //Stages
