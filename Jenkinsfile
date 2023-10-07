@@ -19,49 +19,14 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rajeshsvrn/microservice-demo.git']])
             }
         }
-        
-    // stage('Authenticate with Azure') {
-    //         steps {
-    //             script {
-    //                  withCredentials([azureServicePrincipal(credentialsId: 'azure-cred')]){
-    //                     // Use the Azure service principal credentials
-    //                     sh """
-    //                     az login --service-principal -u \$AZURE_CLIENT_ID -p \$AZURE_CLIENT_SECRET --tenant \$AZURE_TENANT_ID --allow-no-subscriptions
-    //                     """
-    //                 }
-    //             }
-    //         }
-    //     }
+    
 
-// stage('Build and Push Docker Image') {
-//             steps {
-//                 script {
-//                     withCredentials([string(credentialsId: 'ACR_ACCESS_KEY', variable: 'ACR_ACCESS_KEY')]) {
-//                 sh """
-//                     docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${ACR_ACCESS_KEY}
-//                 """
-//             }
-
-//                 // Build the Docker image
-//                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
-
-//                     // Tag the Docker image for ACR
-//                     sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
-
-//                     // Push the Docker image to ACR
-//                     sh "docker push ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
-                        
-//                     }   
-//               }
-//             }     
-
-
-   stage('Build and Push Docker Image') {
+stage('Build and Push Docker Image') {
             steps {
                 script {
-                    withCredentials([azureServicePrincipal(credentialsId: 'azure-cred')]){
+                    withCredentials([string(credentialsId: 'ACR_ACCESS_KEY', variable: 'ACR_ACCESS_KEY')]) {
                 sh """
-                   az acr login ${ACR_NAME}.azurecr.io 
+                    docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${ACR_ACCESS_KEY}
                 """
             }
 
@@ -76,8 +41,8 @@ pipeline {
                         
                     }   
               }
-            }          
-        
+            }     
+     
         
     }  //Stages
 }  //pipeline  
