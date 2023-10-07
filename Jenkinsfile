@@ -17,7 +17,6 @@ pipeline {
             }
         }
 
-        stages {
         stage('Authenticate with Azure') {
             steps {
                 script {
