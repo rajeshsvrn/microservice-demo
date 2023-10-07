@@ -47,7 +47,7 @@ stage('Build and Push Docker Image') {
           steps {
             script {
                 withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
-                sh ('kubectl apply -f  jenkins-aks-deploy-from-acr.yaml')
+                sh ('kubectl apply -f  paymentservice.yaml')
                 }
             }
         }
