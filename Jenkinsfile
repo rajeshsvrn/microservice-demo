@@ -14,22 +14,20 @@ pipeline {
         // Add more stages for building, testing, and deploying your code
         stage('Build') {
             steps {
-                'sh echo build'
+                  // Your build steps go here
             }
         }
 
         stage('Test') {
             steps {
                 // Your testing steps go here
-                sh 'echo test'
+                
             }
         }
 
         stage('Deploy') {
             steps {
                 // Your deployment steps go here
-
-              sh 'echo deploy'
             }
         }
     }
