@@ -4,6 +4,7 @@ pipeline {
     environment {
         // Define your Azure Container Registry name and resource group
         ACR_NAME = 'onlineboutiquedemo'
+        IMAGE_TAG = '12'
         RESOURCE_GROUP = 'Online-Boutique'
         IMAGE_NAME = 'paymentservice'
         DOCKERFILE_PATH = './paymentservice'
