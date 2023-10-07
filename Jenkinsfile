@@ -33,6 +33,7 @@ pipeline {
 stage('Build and Push Docker Image') {
             steps {
                 script {
+                    dir('/var/lib/jenkins/workspace/paymentservice') {
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
 
@@ -43,6 +44,7 @@ stage('Build and Push Docker Image') {
                     sh "docker push ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
                 }
             }
+            }     
         }
         
     }  //Stages
