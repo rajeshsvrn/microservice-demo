@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG = '15'
         RESOURCE_GROUP = 'Online-Boutique'
         IMAGE_NAME = 'paymentservice'
-        DOCKERFILE_PATH = '/var/lib/jenkins/workspace/paymentservice/paymentservice/Dockerfile'
+        DOCKERFILE_PATH = './paymentservice/Dockerfile'
     }
 
     stages {
@@ -34,8 +34,7 @@ pipeline {
 stage('Build and Push Docker Image') {
             steps {
                 script {
-                    sh "pwd"
-                    dir('/var/lib/jenkins/workspace/paymentservice') {   
+                      
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
 
@@ -45,8 +44,8 @@ stage('Build and Push Docker Image') {
                     // Push the Docker image to ACR
                     sh "docker push ${ACR_NAME}.azurecr.io/${IMAGE_NAME}:${BUILD_NUMBER}"
                         
-                }
-            }
+                
+              }
             }     
         }
         
