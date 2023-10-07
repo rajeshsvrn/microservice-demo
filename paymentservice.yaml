@@ -41,7 +41,7 @@ spec:
               - ALL
           privileged: false
           readOnlyRootFilesystem: true
-        image: onlineboutiquedemo.azurecr.io/paymentservice:59
+        image: onlineboutiquedemo.azurecr.io/paymentservice:74
         ports:
         - containerPort: 50051
         env:
