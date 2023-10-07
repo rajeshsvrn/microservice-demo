@@ -10,35 +10,4 @@ pipeline {
                           userRemoteConfigs: [[url: 'https://github.com/rajeshsvrn/microservice-demo.git']]])
             }
         }
-
-        // Add more stages for building, testing, and deploying your code
-        stage('Build') {
-            steps {
-                  // Your build steps go here
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Your testing steps go here
-                
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Your deployment steps go here
-            }
-        }
     }
-
-    post {
-        success {
-            // Actions to perform when the pipeline is successful
-        }
-        failure {
-            // Actions to perform when the pipeline fails
-        }
-    }
-}
-
