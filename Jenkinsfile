@@ -17,6 +17,7 @@ pipeline {
             }
         }
 
+        stages {
         stage('Authenticate with Azure') {
             steps {
                 script {
@@ -29,7 +30,7 @@ pipeline {
                 }
             }
         }
-
+}
 
 stage('Build and Push Docker Image') {
             steps {
@@ -45,8 +46,6 @@ stage('Build and Push Docker Image') {
                 }
             }
         }
-    }
-        
         
     }  //Stages
 }  //pipeline  
