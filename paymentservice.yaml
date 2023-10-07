@@ -43,7 +43,7 @@ spec:
           readOnlyRootFilesystem: true
         image: onlineboutiquedemo.azurecr.io/paymentservice:59
       imagePullSecrets: 
-        - name: paymentservice-secret
+      - name: paymentservice-secret
         ports:
         - containerPort: 50051
         env:
