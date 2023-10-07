@@ -16,9 +16,8 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rajeshsvrn/microservice-demo.git']])
             }
         }
-
-        stages {
-        stage('Authenticate with Azure') {
+        
+    stage('Authenticate with Azure') {
             steps {
                 script {
                     withCredentials([azureServicePrincipal('your-azure-credentials-id')]) {
@@ -30,7 +29,6 @@ pipeline {
                 }
             }
         }
-}
 
 stage('Build and Push Docker Image') {
             steps {
