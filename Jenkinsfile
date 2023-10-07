@@ -9,6 +9,7 @@ pipeline {
         IMAGE_NAME = 'paymentservice'
         DOCKERFILE_PATH = './paymentservice/Dockerfile'
         AZURE_CRED = 'azure-cred'
+        ACR  = '$ACR'
     }
 
     stages {
@@ -35,7 +36,7 @@ pipeline {
 stage('Build and Push Docker Image') {
             steps {
                 script {
-                    withCredentials([azureServicePrincipal(credentialsId: 'azure-cred')]){
+                    withCredentials([string(credentialsId: 'ACR', variable: 'ACR')]) {
                     //Docker login
 
                     sh """
