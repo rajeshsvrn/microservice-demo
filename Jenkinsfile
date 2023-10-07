@@ -36,12 +36,12 @@ pipeline {
 stage('Build and Push Docker Image') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'ACR', variable: 'ACR')]) {
-                    //Docker login
-
-                    sh """
-                    docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${ACR}
-                    """    
+                    withCredentials([string(credentialsId: 'ACR_ACCESS_KEY', variable: 'ACR_ACCESS_KEY')]) {
+                sh """
+                    docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${ACR_ACCESS_KEY}
+                """
+            }
+ 
                     // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
 
