@@ -41,8 +41,9 @@ stage('Build and Push Docker Image') {
                     docker login ${ACR_NAME}.azurecr.io -u ${ACR_NAME} -p \${ACR_ACCESS_KEY}
                 """
             }
- 
-                    // Build the Docker image
+      }
+}
+                // Build the Docker image
                     sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} -f ${DOCKERFILE_PATH} ."
 
                     // Tag the Docker image for ACR
